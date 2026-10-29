@@ -41,6 +41,12 @@ venv.bak/
 # ------------------------------------------------------------------------------
 # Exclude heavy image sequences (REDS dataset images)
 data/raw/
+data/raw
+data/train_blur/
+data/train_sharp/
+data/val_blur/
+data/val_sharp/
+data/test_blur/
 data/processed/
 *.png
 *.jpg

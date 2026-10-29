@@ -1,0 +1,36 @@
+# ==============================================================================
+# MSVSSM Video Deblurring Configuration
+# Model: MSVSSM (Motion-aware Visual State Space Model for Efficient Video Deblurring)
+# Reference: Zhou et al., CVPR 2026.
+# ==============================================================================
+
+model:
+  type: MSVSSM
+  num_in_ch: 3
+  num_out_ch: 3
+  num_feat: 48
+  num_frame: 5
+  num_blocks: 3
+  d_state: 8
+  center_frame_idx: 2
+  algo: "base" # "base", "fft", or "tsff"
+
+train:
+  patch_size: 256
+  batch_size: 2
+  loss: CharbonnierLoss
+  loss_eps: 1.0e-12
+  optimizer: AdamW
+  lr: 2.0e-4
+  betas: [0.9, 0.99]
+  weight_decay: 1.0e-4
+  lr_schedule:
+    type: CosineAnnealingLR
+    t_max: 1000
+    eta_min: 1.0e-6
+  use_amp: true
+
+val:
+  eval_window_size: 5
+  eval_boundary_policy: replicate
+  val_freq: 200

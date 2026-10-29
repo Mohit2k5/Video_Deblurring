@@ -1,0 +1,31 @@
+{
+  "model": "MSVSSM",
+  "algorithm": "tsff",
+  "algorithm_name": "MSVSSM-TSFF",
+  "total_evaluated_frames": 2400,
+  "total_eval_time_sec": 805.37,
+  "fps": 143.61,
+  "memory_consumed": "1.12 GB Unified Memory",
+  "metrics": {
+    "blurry_baseline": {
+      "aggregate_psnr_db": 22.8853,
+      "mean_psnr_db": 23.903,
+      "mean_ssim": 0.7199,
+      "mean_charbonnier_loss": 0.038678
+    },
+    "restored_model": {
+      "aggregate_psnr_db": 23.2018,
+      "mean_psnr_db": 24.2443,
+      "mean_ssim": 0.7216,
+      "mean_charbonnier_loss": 0.037347
+    },
+    "absolute_gains": {
+      "aggregate_psnr_gain_db": 0.3165,
+      "mean_psnr_gain_db": 0.3413,
+      "mean_ssim_gain": 0.0017,
+      "mean_charbonnier_loss_diff": -0.001331,
+      "positive_frame_psnr_count": 2400,
+      "positive_frame_psnr_ratio_pct": 100.0
+    }
+  }
+}
