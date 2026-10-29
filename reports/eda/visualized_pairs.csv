@@ -1,0 +1,13 @@
+pair_number,dataset_split,sequence_id,frame_filename,blur_path,sharp_path,dimensions,passed_validation
+1,train,045,00000092.png,D:\reds-video-deblurring\data\raw\train_blur\045\00000092.png,D:\reds-video-deblurring\data\raw\train_sharp\045\00000092.png,1280x720,True
+2,train,113,00000073.png,D:\reds-video-deblurring\data\raw\train_blur\113\00000073.png,D:\reds-video-deblurring\data\raw\train_sharp\113\00000073.png,1280x720,True
+3,train,009,00000073.png,D:\reds-video-deblurring\data\raw\train_blur\009\00000073.png,D:\reds-video-deblurring\data\raw\train_sharp\009\00000073.png,1280x720,True
+4,train,085,00000060.png,D:\reds-video-deblurring\data\raw\train_blur\085\00000060.png,D:\reds-video-deblurring\data\raw\train_sharp\085\00000060.png,1280x720,True
+5,train,105,00000031.png,D:\reds-video-deblurring\data\raw\train_blur\105\00000031.png,D:\reds-video-deblurring\data\raw\train_sharp\105\00000031.png,1280x720,True
+6,train,197,00000060.png,D:\reds-video-deblurring\data\raw\train_blur\197\00000060.png,D:\reds-video-deblurring\data\raw\train_sharp\197\00000060.png,1280x720,True
+1,val,019,00000075.png,D:\reds-video-deblurring\data\raw\val_blur\019\00000075.png,D:\reds-video-deblurring\data\raw\val_sharp\019\00000075.png,1280x720,True
+2,val,014,00000035.png,D:\reds-video-deblurring\data\raw\val_blur\014\00000035.png,D:\reds-video-deblurring\data\raw\val_sharp\014\00000035.png,1280x720,True
+3,val,010,00000000.png,D:\reds-video-deblurring\data\raw\val_blur\010\00000000.png,D:\reds-video-deblurring\data\raw\val_sharp\010\00000000.png,1280x720,True
+4,val,026,00000097.png,D:\reds-video-deblurring\data\raw\val_blur\026\00000097.png,D:\reds-video-deblurring\data\raw\val_sharp\026\00000097.png,1280x720,True
+5,val,022,00000020.png,D:\reds-video-deblurring\data\raw\val_blur\022\00000020.png,D:\reds-video-deblurring\data\raw\val_sharp\022\00000020.png,1280x720,True
+6,val,006,00000089.png,D:\reds-video-deblurring\data\raw\val_blur\006\00000089.png,D:\reds-video-deblurring\data\raw\val_sharp\006\00000089.png,1280x720,True

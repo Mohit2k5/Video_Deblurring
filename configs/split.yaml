@@ -1,0 +1,25 @@
+# 90:10 Sequence-Level Split Configuration
+source:
+  dataset_name: train
+  source_sequences: 240
+  provenance: "reports/eda/frame_pairing_summary.csv"
+
+strategy:
+  type: sequence_level_random
+  train_ratio: 0.90
+  held_out_test_ratio: 0.10
+  random_seed: 42
+
+partitions:
+  train:
+    target_count: 216
+    description: "Training sequences for model fitting"
+  held_out_test:
+    target_count: 24
+    description: "Held-out test sequences reserved strictly for final evaluation"
+  val:
+    target_count: 30
+    description: "Original REDS validation sequences (val_blur and val_sharp)"
+  inference_test:
+    target_count: 30
+    description: "Original REDS test_blur sequences (sharp ground truth unavailable)"

@@ -1,0 +1,23 @@
+# Core Deep Learning & Acceleration
+torch>=2.0.0
+torchvision>=0.15.0
+
+# Scientific Computing & Data Processing
+numpy>=1.24.0
+pandas>=2.0.0
+
+# Image & Video Processing
+Pillow>=9.5.0
+opencv-python>=4.8.0
+
+# Visualization & Plotting
+matplotlib>=3.7.0
+seaborn>=0.12.0
+
+# Configuration & Utilities
+PyYAML>=6.0
+tqdm>=4.65.0
+
+# Development, Notebooks & Testing
+pytest>=7.3.0
+jupyter>=1.0.0

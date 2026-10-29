@@ -1,0 +1,32 @@
+# EDA Configuration for REDS Video Deblurring
+paths:
+  raw_dir: data/raw
+  reports_dir: reports/eda
+  figures_dir: figures/eda
+
+# Backwards compatibility keys
+raw_data_dir: data/raw
+report_dir: reports/eda
+figure_dir: figures/eda
+supported_extensions: [.png, .jpg, .jpeg, .bmp, .tiff, .tif]
+sample_limit_statistics: 100
+
+datasets:
+  train_blur: train_blur
+  train_sharp: train_sharp
+  val_blur: val_blur
+  val_sharp: val_sharp
+  test_blur: test_blur
+
+validation:
+  full_validation: true
+  expected_width: 1280
+  expected_height: 720
+  expected_color_mode: RGB
+  sample_limit: null
+
+visualization:
+  train_pair_count: 6
+  val_pair_count: 6
+  consecutive_frames_per_sequence: 3
+  random_seed: 42

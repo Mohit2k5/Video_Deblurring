@@ -1,0 +1,6 @@
+dataset,total_sequences,min_frames,max_frames,mean_frames,median_frames
+test_blur,30,100,100,100.0,100.0
+train_blur,240,100,100,100.0,100.0
+train_sharp,240,100,100,100.0,100.0
+val_blur,30,100,100,100.0,100.0
+val_sharp,30,100,100,100.0,100.0

@@ -1,0 +1,70 @@
+# ==============================================================================
+# EDVR REDS Video Deblurring Configuration
+# Model: EDVR (Enhanced Deformable Video Restoration)
+# Reference: Wang et al., "EDVR: Video Restoration with Enhanced Deformable
+#            Convolutional Networks", CVPRW 2019.
+# Upstream Reference: xinntao/EDVR commit b02e63a0fc5854cad7b11a87f74601612e356eff
+# Hardware Target: NVIDIA GeForce RTX 5060 Laptop GPU (8 GB VRAM)
+# ==============================================================================
+
+# ------------------------------------------------------------------------------
+# 1. Active Configuration (Hardware-Adapted for 8 GB VRAM single-GPU execution)
+# ------------------------------------------------------------------------------
+model:
+  type: EDVR
+  num_in_ch: 3             # Input RGB channels
+  num_out_ch: 3            # Output RGB channels
+  num_feat: 64             # Intermediate feature channels (64 for memory-feasible training on 8 GB VRAM; official EDVR-L uses 128)
+  num_frame: 5             # Temporal window size T=5 frames
+  deformable_groups: 8     # Deformable convolution groups in PCD alignment
+  num_extract_block: 5     # Number of residual blocks in feature extraction
+  num_reconstruct_block: 10 # Number of residual blocks in reconstruction (10 for standard EDVR; 40 for EDVR-L)
+  center_frame_idx: 2      # Center frame index (0-indexed frame 2 of 5)
+  hr_in: true              # True for REDS motion deblurring (x4 downsampling in PreDeblur + x4 PixelShuffle reconstruction)
+  with_predeblur: true     # Multi-scale Pre-deblur module enabled for motion blur handling
+  with_tsa: true           # Temporal and Spatial Attention (TSA) fusion module enabled
+
+train:
+  patch_size: 256          # Training spatial crop size (256x256)
+  batch_size: 2            # Batch size fitted for RTX 5060 8 GB VRAM
+  loss: CharbonnierLoss
+  loss_eps: 1.0e-12        # Differentiable Charbonnier epsilon (matches official BasicSR)
+  optimizer: Adam
+  lr: 2.0e-4               # Initial learning rate
+  betas: [0.9, 0.99]
+  weight_decay: 0.0
+  lr_schedule:
+    type: CosineAnnealingLR
+    t_max: 600000
+    eta_min: 1.0e-7
+  use_amp: true            # PyTorch Automatic Mixed Precision (torch.cuda.amp) for RTX 5060 VRAM efficiency
+
+val:
+  eval_window_size: 5
+  eval_boundary_policy: replicate
+  val_freq: 5000           # Evaluation frequency in training steps
+
+# ------------------------------------------------------------------------------
+# 2. Verified Official Upstream Reference Configurations
+# ------------------------------------------------------------------------------
+# Official EDVR-L REDS Deblur (options/test/EDVR/test_EDVR_L_deblur_REDS.yml):
+#   num_in_ch: 3
+#   num_out_ch: 3
+#   num_feat: 128
+#   num_frame: 5
+#   deformable_groups: 8
+#   num_extract_block: 5
+#   num_reconstruct_block: 40
+#   center_frame_idx: null (defaults to num_frame // 2 = 2)
+#   hr_in: true
+#   with_predeblur: true
+#   with_tsa: true
+#   Total Parameters: 23,602,019
+#
+# Hardware Adaptation Rationale:
+#   Full EDVR-L with 40 reconstruct blocks and 128 channels has 23.6M parameters.
+#   On an 8 GB Laptop GPU, backward passes at batch size 2 with 256x256 crops
+#   can approach or exceed VRAM limits without severe batch truncation.
+#   Setting num_feat=64 and num_reconstruct_block=10 yields 4.04M parameters,
+#   which preserves full architectural fidelity (PreDeblur, PCD, TSA, PixelShuffle)
+#   while fitting comfortably inside 8 GB VRAM at batch size 2.

@@ -1,0 +1,32 @@
+# Dataset and Pipeline Configuration for REDS Video Deblurring
+paths:
+  raw_dir: data/raw
+  manifests_dir: data/manifests
+  splits_dir: splits
+  reports_dir: reports/data_pipeline
+
+datasets:
+  train_blur: train_blur
+  train_sharp: train_sharp
+  val_blur: val_blur
+  val_sharp: val_sharp
+  test_blur: test_blur
+
+split:
+  source_dataset: train
+  train_ratio: 0.90
+  test_ratio: 0.10
+  random_seed: 42
+
+loader:
+  supported_extensions: [.png, .jpg, .jpeg, .bmp, .tiff, .tif]
+  default_window_size: 5
+  boundary_policy: replicate  # replicate, zero_pad, or truncate
+  cache_index: true
+
+preprocessing:
+  crop_size: [256, 256]
+  random_flip_horizontal: true
+  random_flip_vertical: true
+  random_temporal_reverse: true
+  normalize: false
