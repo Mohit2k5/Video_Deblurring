@@ -1,0 +1,90 @@
+# PGDN 2025 (Motion-prior-guided dual-branch restoration) Configuration
+# Adheres strictly to benchmark_v2.yaml protocol
+
+experiment:
+  name: reds_limited_budget_benchmark
+  protocol_version: "2.0"
+  status: ready
+  seed: 42
+  model_name: PGDN
+  model_year: 2025
+  model_description: "Motion-prior-guided dual-branch restoration"
+
+data:
+  train_partition: train
+  validation_partition: val
+  test_partition: held_out_test
+  inference_partition: inference_test
+  window_size: 5
+  center_frame_idx: 2
+  boundary_policy: replicate
+  split_seed: 42
+
+model:
+  num_frames: 5
+  center_frame_idx: 2
+  in_channels: 3
+  embed_dim: 64
+  num_blocks: 4
+  motion_prior_dim: 32
+  use_motion_prior: true
+  dual_branch: true
+
+train:
+  total_steps: 10000
+  patch_size: 128
+  effective_batch_size: 2
+  use_amp: true
+  amp_dtype: float16
+  gradient_clip: 1.0
+  detect_non_finite: true
+  max_consecutive_skips: 10
+
+  loss:
+    type: CharbonnierLoss
+    eps: 1.0e-12
+
+  optimizer:
+    type: AdamW
+    lr: 2.0e-4
+    betas: [0.9, 0.99]
+    weight_decay: 1.0e-4
+
+  scheduler:
+    type: CosineAnnealingLR
+    t_max: 10000
+    eta_min: 1.0e-6
+
+checkpoint:
+  save_latest_every: 500
+  milestones:
+    - 1000
+    - 2500
+    - 5000
+    - 10000
+  save_best: true
+  resume_enabled: true
+  output_dir: experiments/pgdn_2025_10000steps/checkpoints
+
+validation:
+  frequency: 1000
+  deterministic: true
+  random_crop: false
+  selection_metric: aggregate_psnr
+  manifest_path: splits/validation_manifest.csv
+  subset:
+    enabled: true
+    frames_per_sequence: 10
+    seed: 42
+
+evaluation:
+  partition: held_out_test
+  batch_size: 1
+  full_resolution: true
+  clamp_output: true
+  color_space: RGB
+  runtime:
+    warmup_iterations: 20
+    synchronize_device: true
+    measure_peak_memory: true
+  output_dir: evaluation/PGDN-2025

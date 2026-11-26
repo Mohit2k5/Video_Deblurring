@@ -24,12 +24,8 @@ def load_dataset_index(
     inv_path = eda_reports_dir / "dataset_inventory.csv"
     if inv_path.exists() and not force_rescan:
         df_inv = pd.read_csv(inv_path)
-        # Lightweight consistency check: verify at least one sequence directory exists
         if not df_inv.empty and "dataset" in df_inv.columns and "sequence" in df_inv.columns:
-            first_row = df_inv.iloc[0]
-            sample_dir = raw_dir / str(first_row["dataset"]) / str(first_row["sequence"])
-            if sample_dir.exists():
-                return df_inv
+            return df_inv
 
     # If missing or inconsistent, use discover_datasets from dataset_inventory
     from src.data.dataset_inventory import discover_datasets

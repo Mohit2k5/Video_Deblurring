@@ -1,0 +1,35 @@
+{
+  "model_name": "PGDN (2025)",
+  "model_description": "Motion-prior-guided dual-branch restoration",
+  "evaluated_frames": 2400,
+  "aggregate_psnr": {
+    "blur": 40.3152,
+    "restored": 40.3842,
+    "gain": 0.069
+  },
+  "mean_psnr": {
+    "blur": 40.8955,
+    "restored": 40.9821,
+    "gain": 0.0867
+  },
+  "mean_ssim": {
+    "blur": 0.989,
+    "restored": 0.989,
+    "gain": 2e-06
+  },
+  "mean_charbonnier_loss": {
+    "blur": 0.00263,
+    "restored": 0.002737,
+    "delta": 0.000108
+  },
+  "positive_frame_ratio": {
+    "count": 2400,
+    "total": 2400,
+    "percentage": 100.0
+  },
+  "inference_speed": {
+    "avg_frame_time_sec": 0.928,
+    "fps": 1.08,
+    "resolution": "720x1280"
+  }
+}
