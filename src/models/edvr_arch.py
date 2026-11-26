@@ -117,6 +117,20 @@ class DCNv2Pack(nn.Module):
         offset = torch.cat((o1, o2), dim=1)
         mask = torch.sigmoid(mask)
 
+        # On CPU, torchvision deform_conv2d only implements Float32 kernel
+        if x.device.type == "cpu" and x.dtype != torch.float32:
+            res = ops.deform_conv2d(
+                input=x.float(),
+                offset=offset.float(),
+                weight=self.weight.float(),
+                bias=self.bias.float() if self.bias is not None else None,
+                stride=self.stride,
+                padding=self.padding,
+                dilation=self.dilation,
+                mask=mask.float()
+            )
+            return res.to(x.dtype)
+
         return ops.deform_conv2d(
             input=x,
             offset=offset,

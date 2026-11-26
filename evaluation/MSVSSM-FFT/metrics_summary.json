@@ -1,0 +1,31 @@
+{
+  "model": "MSVSSM",
+  "algorithm": "fft",
+  "algorithm_name": "MSVSSM-FFT",
+  "total_evaluated_frames": 2400,
+  "total_eval_time_sec": 822.8,
+  "fps": 129.94,
+  "memory_consumed": "1.12 GB Unified Memory",
+  "metrics": {
+    "blurry_baseline": {
+      "aggregate_psnr_db": 22.8853,
+      "mean_psnr_db": 23.903,
+      "mean_ssim": 0.7199,
+      "mean_charbonnier_loss": 0.038678
+    },
+    "restored_model": {
+      "aggregate_psnr_db": 23.3182,
+      "mean_psnr_db": 24.3617,
+      "mean_ssim": 0.7224,
+      "mean_charbonnier_loss": 0.037132
+    },
+    "absolute_gains": {
+      "aggregate_psnr_gain_db": 0.4329,
+      "mean_psnr_gain_db": 0.4587,
+      "mean_ssim_gain": 0.0025,
+      "mean_charbonnier_loss_diff": -0.001546,
+      "positive_frame_psnr_count": 2400,
+      "positive_frame_psnr_ratio_pct": 100.0
+    }
+  }
+}
